@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChatCompletionRequestMessage } from "openai";
 import axios from "axios";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
@@ -94,7 +93,11 @@ export default function MusicPage() {
             <Empty label="No music generated." />
           </div>
         )}
-        <div>Music goes here</div>
+        {music && (
+          <audio controls className="w-full mt-8">
+            <source src={music} />
+          </audio>
+        )}
       </div>
     </div>
   );
