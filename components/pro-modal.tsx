@@ -17,6 +17,7 @@ import { Check, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export function ProModal() {
   const proModal = useProModal();
@@ -29,6 +30,7 @@ export function ProModal() {
 
       window.location.href = response.data.url;
     } catch (error) {
+      toast.error("Something went wrong. Try again, if not, contact support.");
       console.log(error, "STRIPE_CLIENT_ERROR");
     }
   };
