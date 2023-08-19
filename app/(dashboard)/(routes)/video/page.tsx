@@ -14,8 +14,10 @@ import { useState } from "react";
 import axios from "axios";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 export default function VideoPage() {
+  const proModal = useProModal();
   const router = useRouter();
   const [video, setVideo] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,8 +39,11 @@ export default function VideoPage() {
 
       form.reset();
     } catch (error: any) {
-      // TODO: Open Pro Modal
-      console.error(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        console.log(error);
+      }
     } finally {
       router.refresh();
     }
