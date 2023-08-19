@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: "Vanessa",
     avatar: "V",
-    title: "Writer, Thinker",
+    title: "Journalist, Writer",
     description: "It's fun to play with AI, yeap!",
   },
 ];
