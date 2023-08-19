@@ -15,9 +15,23 @@ import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Check, Zap } from "lucide-react";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useState } from "react";
 
 export function ProModal() {
   const proModal = useProModal();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubscribe = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.log(error, "STRIPE_CLIENT_ERROR");
+    }
+  };
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -49,8 +63,8 @@ export function ProModal() {
         </DialogHeader>
         <DialogFooter>
           <Button
-            // disabled={loading}
-            // onClick={onSubscribe}
+            disabled={isLoading}
+            onClick={onSubscribe}
             size="lg"
             variant="premium"
             className="w-full">
