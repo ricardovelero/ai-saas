@@ -10,9 +10,7 @@ interface MobileSidebarProps {
   apiLimitCount: number;
 }
 
-export default function MobileSidebar({
-  apiLimitCount = 0,
-}: MobileSidebarProps) {
+export default function MobileSidebar({ apiLimitCount }: MobileSidebarProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
