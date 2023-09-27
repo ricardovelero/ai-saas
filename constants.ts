@@ -1,4 +1,11 @@
 import { Code, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
+import * as z from "zod";
+
+export const formSchema = z.object({
+  prompt: z.string().min(1, {
+    message: "Prompt is required",
+  }),
+});
 
 export const MAX_FREE_COUNTS = 5;
 
