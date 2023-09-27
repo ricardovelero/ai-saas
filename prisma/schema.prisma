@@ -25,24 +25,23 @@ model UserSubscription {
 }
 
 model Conversation {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt     DateTime @default(now())
-  lastMessageAt DateTime @default(now())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime  @default(now())
+  lastMessageAt DateTime  @default(now())
   name          String?
-
-  messagesIds String    @db.ObjectId
-  messages    Message[]
+  userId        String    @unique
+  messagesIds   String    @db.ObjectId
+  messages      Message[]
 
   @@index([messagesIds])
 }
 
 model Message {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @unique
-  body      String?
-  image     String?
-  createdAt DateTime @default(now())
-
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String       @unique
+  body           String?
+  image          String?
+  createdAt      DateTime     @default(now())
   conversationId String       @db.ObjectId
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 }
