@@ -78,7 +78,7 @@ export default function Sidebar({
       <div className="px-3 py-2 flex-1">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <div className="relative w-8 h-8 mr-4">
-            <Image fill alt="Logo" src="/logo.png" />
+            <Image fill alt="Logo" src="/logo.png" sizes="32" />
           </div>
           <h1 className={cn("text-2xl font-bold", montserrat.className)}>
             La Furia AI
@@ -94,7 +94,8 @@ export default function Sidebar({
                 pathname === route.href
                   ? "tex-white bg-white/10"
                   : "text-zinc-400"
-              )}>
+              )}
+            >
               <div className="flex items-center flex-1">
                 <route.icon className={cn("h-5 w-5 mr-3", route.color)} />
                 {route.label}
