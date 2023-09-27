@@ -44,7 +44,8 @@ export default function FreeCounter({
           <Button
             onClick={proModal.onOpen}
             variant="premium"
-            className="w-full">
+            className="w-full"
+          >
             Upgrade
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
