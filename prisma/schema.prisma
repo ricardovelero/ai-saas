@@ -29,7 +29,7 @@ model Conversation {
   createdAt     DateTime  @default(now())
   lastMessageAt DateTime  @default(now())
   name          String?
-  userId        String    @unique
+  userId        String    
   messagesIds   String    @db.ObjectId
   messages      Message[]
 
@@ -38,7 +38,7 @@ model Conversation {
 
 model Message {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String       @unique
+  userId         String       
   body           String?
   image          String?
   createdAt      DateTime     @default(now())
