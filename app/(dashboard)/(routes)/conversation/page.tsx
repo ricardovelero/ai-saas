@@ -67,7 +67,7 @@ export default function ConversationPage() {
     <div>
       <Heading
         title="Conversation"
-        description="An advanced conversation model."
+        description="An advanced conversation model. Uses GPT-4 from OpenAI."
         icon={MessageSquare}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
@@ -76,16 +76,18 @@ export default function ConversationPage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
+            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+          >
             <FormField
               name="prompt"
               render={({ field }) => (
                 <FormItem className="col-span-12 lg:col-span-10 ">
                   <FormControl className="m-0 p-0">
                     <Input
+                      autoFocus
                       className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="How do I calculate the radius of a cirlce?"
+                      placeholder="How do I calculate the radius of a circle?"
                       {...field}
                     />
                   </FormControl>
@@ -94,7 +96,8 @@ export default function ConversationPage() {
             />
             <Button
               className="col-span-12 lg:col-span-2 w-full"
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               Generate
             </Button>
           </form>
@@ -120,7 +123,8 @@ export default function ConversationPage() {
                 message.role === "user"
                   ? "bg-white border border-black/10"
                   : "bg-muted"
-              )}>
+              )}
+            >
               {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
               <p className="text-sm">{message.content}</p>
             </div>
