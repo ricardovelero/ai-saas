@@ -29,8 +29,8 @@ export default function ConversationList({
       const response = await axios.post(`/api/conversation/`, {
         name: "New conversation",
       });
+      setItems((current) => [...current, response.data]);
       router.push(`/conversation/${response.data.id}`);
-      router.refresh();
     } catch (error) {
       console.log(error);
     }
