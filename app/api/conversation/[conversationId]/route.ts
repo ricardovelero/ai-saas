@@ -6,6 +6,26 @@ interface IParams {
   conversationId?: string;
 }
 
+export async function GET(request: Request, { params }: { params: IParams }) {
+  try {
+    const { conversationId } = params;
+    const { userId } = auth();
+
+    if (!userId) return NextResponse.json(null);
+
+    const conversation = await prisma.conversation.findFirst({
+      where: { id: params.conversationId },
+    });
+
+    if (!conversation) {
+      return new NextResponse("Invalid Conversation ID", { status: 400 });
+    }
+
+    return NextResponse.json(conversation);
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function DELETE(
   request: Request,
   { params }: { params: IParams }
