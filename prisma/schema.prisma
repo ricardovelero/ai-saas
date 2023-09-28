@@ -29,8 +29,8 @@ model Conversation {
   createdAt     DateTime  @default(now())
   lastMessageAt DateTime  @default(now())
   name          String?
-  userId        String    
-  messagesIds   String    @db.ObjectId
+  userId        String
+  messagesIds   String?   @db.ObjectId
   messages      Message[]
 
   @@index([messagesIds])
@@ -38,9 +38,9 @@ model Conversation {
 
 model Message {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String       
+  userId         String
+  role           String?
   body           String?
-  image          String?
   createdAt      DateTime     @default(now())
   conversationId String       @db.ObjectId
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
