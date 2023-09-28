@@ -33,9 +33,22 @@ export async function POST(req: Request) {
 
     // Call OpenAI
     const response = await openai.createChatCompletion({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages,
     });
+
+    const newMessage = await prisma.message.create({
+      data: {
+        userId,
+        role: "bot",
+        body: response.data.choices[0].message?.content,
+        conversation: {
+          connect: { id: "65144a30a9c2652be6f04a9d" },
+        },
+      },
+    });
+
+    console.log(newMessage);
 
     if (!isPro) await increaseApiLimit();
 
