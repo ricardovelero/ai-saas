@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { MessageSquarePlus } from "lucide-react";
-import Link from "next/link";
 import ConversationBox from "./ConversationBox";
 import { Conversation } from "@prisma/client";
+import useConversation from "@/hooks/useConversation";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type ConversationListProps = {
   title?: string;
@@ -16,10 +18,23 @@ export default function ConversationList({
   title,
   initialItems,
 }: ConversationListProps) {
+  const router = useRouter();
   const [items, setItems] = useState(initialItems);
-  const isOpen = true;
+  const { conversationId } = useConversation();
+  // Temporary
+  let isOpen = true;
 
-  let conversationId = "65144a30a9c2652be6f04a9d";
+  const addConversation = async () => {
+    try {
+      const response = await axios.post(`/api/conversation/`, {
+        name: "New conversation",
+      });
+      router.push(`/conversation/${response.data.id}`);
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <aside
@@ -32,7 +47,7 @@ export default function ConversationList({
         <div className="flex justify-between mb-4 pt-4">
           <div className="text-2xl font-bold text-neutral-800">{title}</div>
           <div className="rounded-full p-2 bg-gray-100 text-gray-600 cursor-pointer hover:opacity-75 transition">
-            <MessageSquarePlus size={20} />
+            <MessageSquarePlus size={20} onClick={addConversation} />
           </div>
         </div>
         {items.map((item) => (
