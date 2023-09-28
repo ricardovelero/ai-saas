@@ -36,10 +36,13 @@ export default function Prompt() {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", {
-        messages: newMessages,
-        conversationId,
-      });
+      const response = await axios.post(
+        `/api/conversation/${conversationId}/messages`,
+        {
+          messages: newMessages,
+          conversationId,
+        }
+      );
 
       setMessages((current) => [...current, userMessage, response.data]);
 
