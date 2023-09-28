@@ -11,7 +11,7 @@ type BodyProps = {
 export default function Body({ initialMessages }: BodyProps) {
   const bottomRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto p-4 space-y-4 lg:space-y-8 lg:p-8">
       {initialMessages?.map((message, i) => (
         <MessageBox
           isLast={i === initialMessages.length - 1}
