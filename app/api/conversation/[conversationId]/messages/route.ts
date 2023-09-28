@@ -36,8 +36,7 @@ export async function POST(req: Request, { params }: { params: IParams }) {
     if (!freeTrial && !isPro)
       return new NextResponse("Free trial has expired.", { status: 403 });
 
-    console.log("Checking messages", messages);
-
+    // Save user msg
     const newUserMessage = await prisma.message.create({
       data: {
         userId,
@@ -49,7 +48,11 @@ export async function POST(req: Request, { params }: { params: IParams }) {
       },
     });
 
-    console.log("New User Message", newUserMessage);
+    //Fetch all messages from current conversation
+    // const currentConversation = await prisma.conversation.findFirst({
+    //   where: { id: conversationId },
+    //   include: { messages: true },
+    // });
 
     // Call OpenAI
     const response = await openai.createChatCompletion({
@@ -67,8 +70,6 @@ export async function POST(req: Request, { params }: { params: IParams }) {
         },
       },
     });
-
-    console.log(newMessage);
 
     if (!isPro) await increaseApiLimit();
 
