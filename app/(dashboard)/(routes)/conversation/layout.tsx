@@ -9,12 +9,11 @@ export default async function ConversationLayout({
   children: React.ReactNode;
 }) {
   const conversations = await getConversations();
-  console.log("Conversations Length:", conversations.length);
 
-  if (!conversations.length) {
-    const newConversation = await createConversation();
-    console.log("New Conversation created", newConversation);
-  }
+  // if (!conversations.length) {
+  //   const newConversation = await createConversation();
+  //   console.log("New Conversation created", newConversation);
+  // }
   return (
     <div>
       <ConversationList title="Conversations" initialItems={conversations} />
