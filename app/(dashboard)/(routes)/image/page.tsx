@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
-import { useProModal } from "@/hooks/use-pro-modal";
+import { useProModal } from "@/hooks/useProModal";
 import toast from "react-hot-toast";
 
 export default function ImagePage() {
@@ -81,7 +81,8 @@ export default function ImagePage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
+            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+          >
             <FormField
               name="prompt"
               render={({ field }) => (
@@ -106,7 +107,8 @@ export default function ImagePage() {
                     disabled={isLoading}
                     onValueChange={field.onChange}
                     value={field.value}
-                    defaultValue={field.value}>
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue defaultValue={field.value} />
@@ -132,7 +134,8 @@ export default function ImagePage() {
                     disabled={isLoading}
                     onValueChange={field.onChange}
                     value={field.value}
-                    defaultValue={field.value}>
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue defaultValue={field.value} />
@@ -151,7 +154,8 @@ export default function ImagePage() {
             />
             <Button
               className="col-span-12 lg:col-span-2 w-full"
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               Generate
             </Button>
           </form>
@@ -178,7 +182,8 @@ export default function ImagePage() {
                 <Button
                   onClick={() => window.open(src)}
                   variant="secondary"
-                  className="w-full">
+                  className="w-full"
+                >
                   <Download className="h-4 w-4 mr-2" />
                   Download
                 </Button>

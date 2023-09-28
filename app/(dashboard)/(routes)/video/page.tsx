@@ -14,7 +14,7 @@ import { useState } from "react";
 import axios from "axios";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
-import { useProModal } from "@/hooks/use-pro-modal";
+import { useProModal } from "@/hooks/useProModal";
 import toast from "react-hot-toast";
 
 export default function VideoPage() {
@@ -66,7 +66,8 @@ export default function VideoPage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
+            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+          >
             <FormField
               name="prompt"
               render={({ field }) => (
@@ -84,7 +85,8 @@ export default function VideoPage() {
             />
             <Button
               className="col-span-12 lg:col-span-2 w-full"
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               Generate
             </Button>
           </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useProModal } from "@/hooks/use-pro-modal";
+import { useProModal } from "@/hooks/useProModal";
 import {
   Dialog,
   DialogContent,
@@ -51,7 +51,8 @@ export function ProModal() {
             {tools.map((tool) => (
               <Card
                 key={tool.href}
-                className="p-3 border-black/5 flex items-center justify-between">
+                className="p-3 border-black/5 flex items-center justify-between"
+              >
                 <div className="flex items-center gap-x-4">
                   <div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
                     <tool.icon className={cn("w-6 h-6", tool.color)} />
@@ -69,7 +70,8 @@ export function ProModal() {
             onClick={onSubscribe}
             size="lg"
             variant="premium"
-            className="w-full">
+            className="w-full"
+          >
             Upgrade
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
