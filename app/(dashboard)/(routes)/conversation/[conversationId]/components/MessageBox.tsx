@@ -19,7 +19,7 @@ export default function MessageBox({ isLast, data }: MessageBoxProps) {
       )}
     >
       {data.role === "user" ? <UserAvatar /> : <BotAvatar />}
-      <p className="text-sm whitespace-pre">{data.body}</p>
+      <p className="text-sm">{data.body}</p>
     </div>
   );
 }
