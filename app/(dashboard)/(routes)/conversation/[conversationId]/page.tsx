@@ -5,6 +5,7 @@ import Heading from "@/components/heading";
 import { MessageSquare } from "lucide-react";
 import Body from "./components/Body";
 import Prompt from "@/components/prompt";
+import Header from "./components/Header";
 
 type IParams = {
   conversationId: string;
@@ -24,13 +25,7 @@ export default async function ConversationPage({
         <div className="h-full flex flex-col">
           {conversation ? (
             <>
-              <Heading
-                title="Conversation"
-                description="An advanced conversation model. Uses GPT-4 from OpenAI."
-                icon={MessageSquare}
-                iconColor="text-violet-500"
-                bgColor="bg-violet-500/10"
-              />
+              <Header conversation={conversation} />
               <Body initialMessages={conversation.messages} />
               <Prompt />
             </>
