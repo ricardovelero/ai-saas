@@ -1,8 +1,6 @@
 import React from "react";
 import getConversationById from "@/app/actions/getConversationById";
 import Empty from "@/components/empty";
-import Heading from "@/components/heading";
-import { MessageSquare } from "lucide-react";
 import Body from "./components/Body";
 import Prompt from "@/components/prompt";
 import Header from "./components/Header";
