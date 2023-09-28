@@ -12,9 +12,11 @@ import { ChatCompletionRequestMessage } from "openai";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useProModal } from "@/hooks/use-pro-modal";
+import { useProModal } from "@/hooks/useProModal";
+import useConversation from "@/hooks/useConversation";
 
 export default function Prompt() {
+  const { conversationId } = useConversation();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter();
   const proModal = useProModal();
@@ -36,6 +38,7 @@ export default function Prompt() {
 
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
+        conversationId,
       });
 
       setMessages((current) => [...current, userMessage, response.data]);
