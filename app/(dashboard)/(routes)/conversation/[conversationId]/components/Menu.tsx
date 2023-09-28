@@ -36,7 +36,6 @@ export default function ContextMenu({ conversation }: ProfileDrawerProps) {
       .delete(`/api/conversation/${conversation.id}`)
       .then(() => {
         router.push("/conversation");
-        router.refresh();
       })
       .catch((error) => {
         console.log(error.message);
@@ -49,7 +48,7 @@ export default function ContextMenu({ conversation }: ProfileDrawerProps) {
     <>
       <AlertDialog>
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild>
             <MoreVertical
               size={32}
               className="text-gray-600 cursor-pointer hover:opacity-75 transition"
