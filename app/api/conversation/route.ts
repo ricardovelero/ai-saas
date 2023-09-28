@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   try {
     const { userId } = auth();
     const body = await req.json();
-    const { messages } = body;
+    const { messages, conversationId } = body;
     const freeTrial = await checkApiLimit();
     const isPro = await checkSubscription();
 
@@ -31,6 +31,21 @@ export async function POST(req: Request) {
     if (!freeTrial && !isPro)
       return new NextResponse("Free trial has expired.", { status: 403 });
 
+    console.log("Checking messages", messages);
+
+    const newUserMessage = await prisma.message.create({
+      data: {
+        userId,
+        role: messages[0].role,
+        body: messages[0].content,
+        conversation: {
+          connect: { id: conversationId },
+        },
+      },
+    });
+
+    console.log("New User Message", newUserMessage);
+
     // Call OpenAI
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -43,7 +58,7 @@ export async function POST(req: Request) {
         role: "bot",
         body: response.data.choices[0].message?.content,
         conversation: {
-          connect: { id: "65144a30a9c2652be6f04a9d" },
+          connect: { id: conversationId },
         },
       },
     });
