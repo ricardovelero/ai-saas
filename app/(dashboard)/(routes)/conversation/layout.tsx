@@ -7,11 +7,11 @@ export default async function ConversationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const conversations = await getConversations();
+  // const conversations = await getConversations();
 
   return (
     <div>
-      <ConversationList title="Conversations" initialItems={conversations} />
+      <ConversationList title="Conversations" />
       {children}
     </div>
   );
