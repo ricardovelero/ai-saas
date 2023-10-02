@@ -6,11 +6,7 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import Menu from "./Menu";
 
-type HeaderProps = {
-  conversation: Conversation;
-};
-
-export default function Header({ conversation }: HeaderProps) {
+export default function Header() {
   return (
     <>
       <div className="flex justify-between items-center bg-white w-full border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 shadow-sm">
@@ -22,7 +18,6 @@ export default function Header({ conversation }: HeaderProps) {
             <ChevronLeft size={32} />
           </Link>
         </div>
-        <Menu conversation={conversation} />
       </div>
     </>
   );
