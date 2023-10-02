@@ -14,12 +14,19 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useProModal } from "@/hooks/useProModal";
 import useConversation from "@/hooks/useConversation";
+import useSWRMutation from "swr/mutation";
+import { createRequest } from "@/lib/swrRequests";
 
 export default function Prompt() {
-  const { conversationId } = useConversation();
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  let { conversationId } = useConversation();
   const router = useRouter();
   const proModal = useProModal();
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const { trigger, isMutating } = useSWRMutation(
+    "/api/conversation",
+    createRequest
+  );
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,6 +36,12 @@ export default function Prompt() {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!conversationId) {
+      console.log("Create a conversation");
+      const newConversation = await trigger({ name: "" } as any);
+      conversationId = newConversation.id;
+    }
+
     try {
       const userMessage: ChatCompletionRequestMessage = {
         role: "user",

@@ -24,6 +24,10 @@ export default function ConversationList({ title }: ConversationListProps) {
   // Temporary
   let isOpen = true;
 
+  const handleClickAdd = () => {
+    // router.push();
+  };
+
   if (isError) {
     return (
       <aside
@@ -53,7 +57,7 @@ export default function ConversationList({ title }: ConversationListProps) {
         <div className="flex justify-between mb-4 pt-4">
           <div className="text-2xl font-bold text-neutral-800">{title}</div>
           <div className="rounded-full p-2 bg-gray-100 text-gray-600 cursor-pointer hover:opacity-75 transition">
-            <MessageSquarePlus size={20} onClick={() => {}} />
+            <MessageSquarePlus size={20} onClick={handleClickAdd} />
           </div>
         </div>
         {isLoading && <LoadingComponent />}
