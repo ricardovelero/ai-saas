@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Loader2, MessageSquarePlus } from "lucide-react";
+import { MessageSquarePlus } from "lucide-react";
 import { Conversation } from "@prisma/client";
 import useConversations from "@/hooks/useConversations";
 import useConversation from "@/hooks/useConversation";
@@ -25,7 +25,7 @@ export default function ConversationList({ title }: ConversationListProps) {
   let isOpen = true;
 
   const handleClickAdd = () => {
-    // router.push();
+    router.push("/conversation");
   };
 
   if (isError) {
@@ -36,7 +36,6 @@ export default function ConversationList({ title }: ConversationListProps) {
           isOpen ? "hidden" : "block w-full left-0"
         )}
       >
-        {" "}
         <div className="px-5">
           <div className="flex justify-between mb-4 pt-4">
             <ErrorComponent />
