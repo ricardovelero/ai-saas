@@ -50,7 +50,7 @@ export default function ContextMenu({ conversation }: ProfileDrawerProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <MoreVertical
-              size={32}
+              size={18}
               className="text-gray-600 cursor-pointer hover:opacity-75 transition"
             />
           </DropdownMenuTrigger>

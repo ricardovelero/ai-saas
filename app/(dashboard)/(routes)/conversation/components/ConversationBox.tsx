@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import ContextMenu from "./Menu";
 
 type ConversationBoxProps = {
   data: any;
@@ -47,7 +48,8 @@ export default function ConversationBox({
               <p className="text-xs text-gray-400 font-light">
                 {format(new Date(lastMessage.createdAt), "p")}
               </p>
-            )}
+            )}{" "}
+            <ContextMenu conversation={data} />
           </div>
           <p className="truncate text-sm text-black font-medium">
             {lastMessageText}

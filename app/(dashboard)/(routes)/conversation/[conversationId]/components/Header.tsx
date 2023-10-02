@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Conversation } from "@prisma/client";
+import React from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import Menu from "./Menu";
 
 export default function Header() {
   return (
