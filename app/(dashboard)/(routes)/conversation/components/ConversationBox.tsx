@@ -28,7 +28,7 @@ export default function ConversationBox({
   const lastMessageText = useMemo(() => {
     if (lastMessage?.body) return lastMessage?.body;
 
-    return "New conversation";
+    return "Empty conversation";
   }, [lastMessage]);
 
   return (
