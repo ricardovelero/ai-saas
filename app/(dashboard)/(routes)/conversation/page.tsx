@@ -3,7 +3,6 @@
 import clsx from "clsx";
 
 import useConversation from "@/hooks/useConversation";
-import Empty from "@/components/empty";
 import Prompt from "@/components/prompt";
 
 export default function ConversationsHome() {
