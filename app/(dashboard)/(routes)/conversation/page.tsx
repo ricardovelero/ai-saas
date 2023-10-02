@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 import useConversation from "@/hooks/useConversation";
 import Empty from "@/components/empty";
+import Prompt from "@/components/prompt";
 
 export default function ConversationsHome() {
   const { isOpen } = useConversation();
@@ -12,7 +13,7 @@ export default function ConversationsHome() {
     <div
       className={clsx("lg:pl-80 h-full lg:block", isOpen ? "block" : "hidden")}
     >
-      <Empty label="No conversation started." />
+      <Prompt />
     </div>
   );
 }
