@@ -8,9 +8,11 @@ export async function GET(req: Request) {
     const { userId } = auth();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
-    const conversations: Conversation[] = await prisma.conversation.findMany();
-
-    // console.log(conversations);
+    const conversations: Conversation[] = await prisma.conversation.findMany({
+      include: {
+        messages: true,
+      },
+    });
 
     return NextResponse.json(conversations);
   } catch (error) {
