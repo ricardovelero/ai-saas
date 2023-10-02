@@ -1,21 +1,21 @@
 import React from "react";
-import getConversationById from "@/app/actions/getConversationById";
 import Empty from "@/components/empty";
 import Body from "./components/Body";
 import Prompt from "@/components/prompt";
 import Header from "./components/Header";
+import useSWR from "swr";
+import { fetcher } from "@/lib/swrRequests";
 
 type IParams = {
   conversationId: string;
 };
 
-export default async function ConversationPage({
-  params,
-}: {
-  params: IParams;
-}) {
-  const conversation = await getConversationById(params.conversationId);
-  // const messages = await getMessages(params.conversationId);
+export default function ConversationPage({ params }: { params: IParams }) {
+  const {
+    data: conversation,
+    error: isError,
+    isLoading,
+  } = useSWR(`/api/conversations/${params.conversationId}`, fetcher);
 
   return (
     <>
