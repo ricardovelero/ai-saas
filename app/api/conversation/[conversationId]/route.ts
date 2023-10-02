@@ -11,10 +11,10 @@ export async function GET(request: Request, { params }: { params: IParams }) {
     const { conversationId } = params;
     const { userId } = auth();
 
-    if (!userId) return NextResponse.json(null);
+    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
     const conversation = await prisma.conversation.findFirst({
-      where: { id: params.conversationId },
+      where: { id: conversationId },
     });
 
     if (!conversation) {
