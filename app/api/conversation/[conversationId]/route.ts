@@ -15,6 +15,7 @@ export async function GET(request: Request, { params }: { params: IParams }) {
 
     const conversation = await prisma.conversation.findFirst({
       where: { id: conversationId },
+      include: { messages: true },
     });
 
     if (!conversation) {
