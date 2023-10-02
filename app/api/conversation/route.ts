@@ -1,6 +1,23 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
+import { Conversation } from "@prisma/client";
+
+export async function GET(req: Request) {
+  try {
+    const { userId } = auth();
+    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+
+    const conversations: Conversation[] = await prisma.conversation.findMany();
+
+    // console.log(conversations);
+
+    return NextResponse.json(conversations);
+  } catch (error) {
+    console.error("[CONVERSATIONS GET ERROR]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}
 
 export async function POST(req: Request) {
   try {
