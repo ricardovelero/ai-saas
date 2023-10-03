@@ -26,6 +26,10 @@ export default function Prompt() {
     "/api/conversation",
     createRequest
   );
+  const { trigger: triggerMsg, isMutating: isMsgMutating } = useSWRMutation(
+    `/api/conversation/${conversationId}`,
+    createRequest
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,17 +53,25 @@ export default function Prompt() {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post(
-        `/api/conversation/${conversationId}/messages`,
-        {
-          messages: newMessages,
-          conversationId,
-        }
-      );
+      const response = await trigger({
+        messages: newMessages,
+        conversationId,
+      } as any);
+
+      console.log(response);
+
+      // const response = await axios.post(
+      //   `/api/conversation/${conversationId}/messages`,
+      //   {
+      //     messages: newMessages,
+      //     conversationId,
+      //   }
+      // );
 
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
+      router.push(`/conversation/${conversationId}`);
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
@@ -69,8 +81,6 @@ export default function Prompt() {
         );
         console.log(error);
       }
-    } finally {
-      router.refresh();
     }
   };
   return (
